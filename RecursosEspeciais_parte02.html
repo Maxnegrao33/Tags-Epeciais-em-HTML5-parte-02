@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta author="Maciel Oliveira" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aula 02</title>
+    <style>
+      td,
+      tr {
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <table border="5">
+      <tr>
+        <td>
+          <h1>Tags Especiais</h1>
+
+          <meter value="0" , min="0" , max="100"></meter>
+          <!--Progress define o progresso de uma ação-->
+          <progress id="progress" max="100" min="0" value="0"></progress>
+
+          <script>
+            var progress = document.getElementById("progress");
+            const interval = setInterval(() => {
+              progress.value += 10;
+              if (progress.value >= 100) {
+                alert("Carregado com Sucesso!");
+                clearInterval(interval);
+              }
+            }, 1000);
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h1>Mark e JavaScript</h1>
+          <mark>Esta tag marca textos </mark>
+
+          <input type="text" id="busca" /><br />
+          <p id="descricao">
+            Ontem foi complicado, passei o dia todo procurando vídeos,
+            respeitando quem queria dormir, procurando não atrapalhar ninguém,
+            no final do dia estava cansado, com uma enorme dor nas costas E o
+            pessoal me culpando pela internet lenta, falando mal de mim pelas
+            costas, julgando que eu estava usando Isso me deixou full pistola,
+            se falam mal de mim eu estando ali. Imaginem quando não estou.
+          </p>
+
+          <script>
+            var searchField = document.getElementById("busca");
+            var descriptionObject = document.getElementById("descricao");
+            var textToSearch = descriptionObject.innerHTML;
+
+            function realizaBusca(busca) {
+              const regex = new RegExp(
+                `(${busca})(?!(.(?!<mark>))*</mark>)+`,
+                "ig"
+              );
+              const ocurrences = textToSearch.match(regex);
+              descriptionObject.innerHTML = textToSearch.replace(
+                regex,
+                `<mark>${busca}</mark>`
+              );
+            }
+            searchField.addEventListener("keyup", (e) =>
+              realizaBusca(e.target.value)
+            );
+          </script>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
